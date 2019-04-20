@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se452.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.Column;
@@ -26,11 +27,13 @@ public class Flight implements Serializable {
     private String flightNumber;
     
     @ManyToOne
-    @JoinColumn(name = "origination_airport", nullable = false)    
+    @JoinColumn(name = "origination_airport", nullable = false)
+    @JsonIgnore
     private Airport originationAirport;
 
     @ManyToOne
     @JoinColumn(name = "destination_airport", nullable = false)    
+    @JsonIgnore
     private Airport destinationAirport;
 
     

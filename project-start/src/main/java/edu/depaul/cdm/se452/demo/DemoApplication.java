@@ -32,7 +32,7 @@ public class DemoApplication {
         };
     }
     
-    @Bean
+    //@Bean
     public CommandLineRunner noSqlDemo(FlightReviewRepository repository) {
         return (args) -> {
             // save a review
@@ -40,6 +40,8 @@ public class DemoApplication {
             review.setFlightNum("AA1111");
             review.setReview("It was AA flight");
             repository.save(review);
+            
+            
         };
     }
     
