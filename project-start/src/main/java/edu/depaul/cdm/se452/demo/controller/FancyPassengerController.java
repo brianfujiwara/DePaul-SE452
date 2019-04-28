@@ -19,14 +19,14 @@ public class FancyPassengerController implements WebMvcConfigurer {
 
     @GetMapping("/fancypassenger")
     public String showForm(Passenger passenger) {
-        return "formv2";
+        return "include-form";
     }
 
     @PostMapping("/fancypassenger")
     public String checkPersonInfo(@Valid Passenger passenger, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "formv2";
+            return "include-form";
         }
 
         return "redirect:/results";
