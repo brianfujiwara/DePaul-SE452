@@ -11,12 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Controller
 public class FancyPassengerController implements WebMvcConfigurer {
-
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/results").setViewName("results");
     }
-
+    
     @GetMapping("/fancypassenger")
     public String showForm(Passenger passenger) {
         return "include-form";

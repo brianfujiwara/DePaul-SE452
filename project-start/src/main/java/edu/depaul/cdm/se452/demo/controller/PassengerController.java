@@ -11,12 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Controller
 public class PassengerController implements WebMvcConfigurer {
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/results").setViewName("results");
-    }
-
     @GetMapping("/passenger")
     public String showForm(Passenger passenger) {
         return "simpleform";
@@ -29,6 +23,6 @@ public class PassengerController implements WebMvcConfigurer {
             return "simpleform";
         }
 
-        return "redirect:/results";
+        return "results";
     }
 }

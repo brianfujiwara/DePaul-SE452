@@ -1,15 +1,15 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-<head th:replace="fragments/header :: common-header">    
-</head>
+    <head th:replace="fragments/header :: common-header">    
+    </head>
 
     <body>
-<div th:replace="fragments/header :: header"></div>        
+        <div th:replace="fragments/header :: header"></div>        
         <div class="container">
             Enter Passenger Info
 
-            <form action="#" th:action="@{/passenger}" th:object="${passenger}" method="post">
+            <form action="#" th:action="@{/fancypassenger}" th:object="${passenger}" method="post">
                 <div class="row form-group">
                     <div class="col-lg-6">                
                         <label for="name">Name</label>
@@ -27,6 +27,6 @@
                 <button type="submit" class="btn btn-lg btn-primary">Submit</button>            
             </form>
         </div>   
-<div th:replace="fragments/footer :: footer"></div>        
+        <div th:replace="fragments/footer :: footer"></div>        
     </body>
 </html>
