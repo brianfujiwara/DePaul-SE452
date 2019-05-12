@@ -20,9 +20,9 @@ public class AirportRepositoryTest {
     @Test
     public void findByAiportCode() {
         final String ORD = "ORD";
-        final String CHICAGO = "Chicago, IL";
+        final String CHICAGO = "Chicago";
         Airport ord = repository.findByCode(ORD);
-        Assert.assertEquals(CHICAGO, ord.getCityState());
+        Assert.assertEquals(CHICAGO, ord.getCity());
         Assert.assertEquals(3, ord.getOriginationFlights().size());
     }
 }

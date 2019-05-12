@@ -28,10 +28,10 @@ public class FlightRespositoryTest {
     
     @Test
     public void testAirport() {
-        final String CHICAGO = "Chicago, IL";
+        final String CHICAGO = "Chicago";
         
         Flight flight = repository.findByFlightNumber("AA1211").get(0);
-        String originationCityState = flight.getOriginationAirport().getCityState(); 
+        String originationCityState = flight.getOriginationAirport().getCity(); 
         Assert.assertEquals(CHICAGO, originationCityState);
     }
 

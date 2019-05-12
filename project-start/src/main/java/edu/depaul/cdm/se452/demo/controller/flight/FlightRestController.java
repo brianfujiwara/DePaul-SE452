@@ -1,4 +1,4 @@
-package edu.depaul.cdm.se452.demo.controller;
+package edu.depaul.cdm.se452.demo.controller.flight;
 
 import edu.depaul.cdm.se452.demo.model.Flight;
 import edu.depaul.cdm.se452.demo.model.FlightRepository;
@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FlightController {
+public class FlightRestController {
     private FlightRepository repo;
     
-    public FlightController(FlightRepository repo) {
+    public FlightRestController(FlightRepository repo) {
         this.repo = repo;
     }
     
-    @GetMapping("/flights")
+    @GetMapping("/rest/flights")
     public Collection<Flight> flights() {
         return repo.findAll().stream().collect(Collectors.toList());
     }
+
+
 }

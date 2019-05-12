@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <head th:replace="fragments/header :: common-header">    
+    </head>
+
+    <body>
+        <div th:replace="fragments/header :: header"></div>        
+        <div class="container">
+            Enter Flight Info
+
+            <form action="#" th:action="@{/flights/save}" th:object="${flight}" method="post">
+                <div class="row form-group">
+                    <div class="col-lg-6">                
+                        <label for="name">Flight Number</label>
+                        <input type="text" class="form-control" th:field="*{flightNumber}" placeholder="flightNumber">
+                        <span class="badge-warning" th:if="${#fields.hasErrors('flightNumber')}" th:errors="*{flightNumber}">Flight Number Error</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-6">                
+                        <label for="age">Departure Date</label>
+                        <input type="number" class="form-control" th:field="*{departureDate}" placeholder="departureTime">
+                        <span class="badge-warning" th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}">Departure Date  Error</span>
+                    </div>
+                </div>                
+                <div class="row form-group">
+                    <div class="col-lg-6">                
+                        <label for="age">Departure Time</label>
+                        <input type="number" class="form-control" th:field="*{departureTime}" placeholder="departureTime">
+                        <span class="badge-warning" th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}">Departure Date Time Error</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">Submit</button>            
+            </form>
+        </div>   
+        <div th:replace="fragments/footer :: footer"></div>        
+    </body>
+</html>

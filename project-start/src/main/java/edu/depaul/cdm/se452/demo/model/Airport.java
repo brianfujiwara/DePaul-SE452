@@ -30,9 +30,13 @@ public class Airport implements Serializable {
     @Size(max = 5)
     private String code;
 
-    @Column(name = "city_st")
-    private String cityState;
+    private String name;
+    
+    private String city;
 
+    @Column(name = "st_prov")
+    private String stateProv;
+    
     @OneToMany(
             mappedBy = "originationAirport",
             cascade = CascadeType.ALL,
