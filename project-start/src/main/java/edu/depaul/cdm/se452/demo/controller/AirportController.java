@@ -2,7 +2,6 @@ package edu.depaul.cdm.se452.demo.controller;
 
 import edu.depaul.cdm.se452.demo.model.AirportRepository;
 import edu.depaul.cdm.se452.demo.model.Airport;
-import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,19 +10,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/airport")
-@SessionAttributes("sessionAirport")
 public class AirportController {
 
     private AirportRepository repo;
-    
+
+    /**
+     * Example showing auto binding by the framework to setup repo
+     * @Todo What happens when this constructor is not there?
+     */
     public AirportController(AirportRepository repo) {
         this.repo = repo;
     }
@@ -40,21 +37,20 @@ public class AirportController {
         return "airports/form";
     }
 
+    /**
+     * Demo showing handling of request param
+     *
+     * @param code
+     * @param model
+     * @return
+     */
     @GetMapping(params = "edit")
-    public ModelAndView edit(@RequestParam String code) {
-        ModelAndView mav = new ModelAndView("/airports/form");
+    public String edit(@RequestParam String code, Model model) {
         Airport airport = repo.findByCode(code);
-        mav.addObject(airport);
-        return mav;
+        model.addAttribute(airport);
+        return "/airports/form";
     }
 
-    @GetMapping(params = "delete")
-    public String delete(@RequestParam String code) {
-        Airport airport = repo.findByCode(code);
-        repo.delete(airport);
-        return "redirect:/airport";
-    }
-    
     @PostMapping
     public String saveFlight(@ModelAttribute("airport") Airport airport, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -63,6 +59,22 @@ public class AirportController {
 
         repo.save(airport);
 
+        return "redirect:/airport";
+    }
+
+    /**
+     * Demo showing 1) passing ID rather than Code 2) Handling of Optional when
+     * using findById
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping(params = "delete")
+    public String delete(@RequestParam Long id) {
+        Airport airport = repo.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Invalid airport id:" + id)
+        );
+        repo.delete(airport);
         return "redirect:/airport";
     }
 

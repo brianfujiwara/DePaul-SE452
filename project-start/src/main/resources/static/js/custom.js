@@ -1,6 +1,23 @@
-firstTime = sessionStorage.getItem("firstTime");
+/*
+ * Search airport
+ */
+function airportSearcher() {
+    // Declare variables 
+    var input, filter, table, tr, i, txtValue;
+    input = document.getElementById("searchValue");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("airportList");
+    tr = table.getElementsByTagName("tr");
 
-if (firstTime === null){
-    alert('Hello from SE352/452');
-    sessionStorage.setItem("firstTime", "false");
-}    
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 1; i < tr.length; i++) {
+        txtValue = tr[i].innerText;
+        if (txtValue) {
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}

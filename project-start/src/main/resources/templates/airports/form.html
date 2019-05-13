@@ -43,7 +43,8 @@
                         <span class="badge-warning" th:if="${#fields.hasErrors('stateProv')}" th:errors="*{stateProv}">Airport State Error</span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary">Submit</button>            
+                <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                <a class="btn btn-lg btn-warning" th:href="@{/airport}"> Cancel </a></td>
             </form>
         </div>   
         <div th:replace="fragments/footer :: footer"></div>        

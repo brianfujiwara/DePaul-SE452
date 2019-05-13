@@ -51,5 +51,5 @@ public class Airport implements Serializable {
             fetch = FetchType.LAZY
     )
     @ToString.Exclude
-    private List<Flight> arrivalFlights;
+    private List<Flight> destinationFlights;
 }

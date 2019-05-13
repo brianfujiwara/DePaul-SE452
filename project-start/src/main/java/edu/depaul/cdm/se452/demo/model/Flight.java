@@ -2,7 +2,6 @@ package edu.depaul.cdm.se452.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -13,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,23 +37,18 @@ public class Flight implements Serializable {
     @JoinColumn(name = "destination_airport", nullable = false)    
     @JsonIgnore
     private Airport destinationAirport;
-
     
- //   @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="departure_dt")
     private LocalDate departureDate;
 
     @Column(name="departure_tm")
-//    @Temporal(TemporalType.TIME)
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalDateTime departureTime;
     
-//    @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate arrivalDate;
     
-//    @Temporal(TemporalType.TIME)
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalDateTime arrivalTime;
     

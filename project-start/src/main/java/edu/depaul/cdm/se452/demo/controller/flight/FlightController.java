@@ -1,42 +1,48 @@
 package edu.depaul.cdm.se452.demo.controller.flight;
 
-import edu.depaul.cdm.se452.demo.model.Flight;
+import edu.depaul.cdm.se452.demo.model.Airport;
 import edu.depaul.cdm.se452.demo.model.FlightRepository;
-import javax.validation.Valid;
+import edu.depaul.cdm.se452.demo.model.AirportRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FlightController {
-    private FlightRepository repo;
+    private FlightRepository flightRepo;
+    private AirportRepository airportRepo;
     
-    public FlightController(FlightRepository repo) {
-        this.repo = repo;
+    public FlightController(FlightRepository flightRepo, AirportRepository airportRepo) {
+        this.flightRepo = flightRepo;
+        this.airportRepo = airportRepo;
+    }
+    
+    @GetMapping(path = "/flight", params = "arrivals")
+    public String showFromAirport(@RequestParam Long airportId, Model model) {
+        Airport airport = airportRepo.findById(airportId).orElseThrow(
+                () -> new IllegalArgumentException("Invalid airport id:" + airportId)
+        );
+        model.addAttribute("flights", airport.getDestinationFlights());
+        model.addAttribute("arrivalsOnly", true);
+        return "flights/list";
+    }
+
+    @GetMapping(path = "/flight", params = "departures")
+    public String showToAirport(@RequestParam Long airportId, Model model) {
+        Airport airport = airportRepo.findById(airportId).orElseThrow(
+                () -> new IllegalArgumentException("Invalid airport id:" + airportId)
+        );
+        model.addAttribute("flights", airport.getOriginationFlights());
+        model.addAttribute("leavingOnly", true);
+        return "flights/list";
     }
     
     @GetMapping("/flights")
     public String showAll(Model model) {
-        model.addAttribute("flights", repo.findAll());
-        return "flights/allflights";
+        model.addAttribute("flights", flightRepo.findAll());
+        
+        return "flights/list";
     }
 
-    @GetMapping("/flights/create")
-    public String showCreateForm(Model model) {
-        Flight flight = new Flight();
-        model.addAttribute("flight", flight);
-        return "flights/addflight";
-    }
-    
-    @PostMapping("/flights/save")
-    public String saveFlight(@Valid Flight flight, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "flights/addflight";
-        }
-        repo.save(flight);
-        return "redirect:/flights";
-    }
 }
