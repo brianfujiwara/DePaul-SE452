@@ -2,6 +2,7 @@ package edu.depaul.cdm.se452.demo.controller;
 
 import edu.depaul.cdm.se452.demo.model.AirportRepository;
 import edu.depaul.cdm.se452.demo.model.Airport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,19 +16,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/airport")
 public class AirportController {
 
+    @Autowired
     private AirportRepository repo;
+    public AirportController() { }
 
     /**
      * Example showing auto binding by the framework to setup repo
-     * @Todo What happens when this constructor is not there?
-     */
     public AirportController(AirportRepository repo) {
         this.repo = repo;
     }
+     */
+    
 
     @GetMapping
     public String showAll(Model model) {
         model.addAttribute("airports", repo.findAll());
+
         return "airports/list";
     }
 

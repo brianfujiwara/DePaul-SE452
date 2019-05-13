@@ -3,6 +3,7 @@ package edu.depaul.cdm.se452.demo.controller.flight;
 import edu.depaul.cdm.se452.demo.model.Airport;
 import edu.depaul.cdm.se452.demo.model.FlightRepository;
 import edu.depaul.cdm.se452.demo.model.AirportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +11,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FlightController {
+    @Autowired
     private FlightRepository flightRepo;
+    
+    @Autowired
     private AirportRepository airportRepo;
     
+    /**
+     * 
+     * @param flightRepo
+     * @param airportRepo 
     public FlightController(FlightRepository flightRepo, AirportRepository airportRepo) {
         this.flightRepo = flightRepo;
         this.airportRepo = airportRepo;
     }
+     */
     
     @GetMapping(path = "/flight", params = "arrivals")
     public String showFromAirport(@RequestParam Long airportId, Model model) {
