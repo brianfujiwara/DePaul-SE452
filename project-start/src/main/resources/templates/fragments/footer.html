@@ -5,10 +5,14 @@
     <body>
         <div th:fragment="footer" style="margin-top: 32px;">
             <div class="container">
+                <div sec:authorize="isAuthenticated()">
+                    <span>Logged user: <span sec:authentication="name"></span></span>
+                    <a class="btn btn-danger" th:href="@{/logout}">Sign Out</a>
+                </div>
                 <div class="footer-bar">
                     &copy; 2019 depaul.edu
                 </div>
             </div>
         </div>
-     </body>
+    </body>
 </html>
