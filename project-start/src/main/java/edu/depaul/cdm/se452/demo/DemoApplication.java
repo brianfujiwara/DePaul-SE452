@@ -5,12 +5,10 @@ import edu.depaul.cdm.se452.demo.model.FlightReview;
 import edu.depaul.cdm.se452.demo.model.FlightReviewRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -21,16 +19,7 @@ public class DemoApplication {
 
     private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
-//    @Bean
-    public CommandLineRunner demo(PasswordEncoder passwordEncoder) {
-        return (args) -> {
-            System.out.println("begin encoded");
-            System.out.println(passwordEncoder.encode("password"));
-            System.out.println("end encoded");
-        };
-    }
-       
-    //@Bean
+    @Bean
     public CommandLineRunner demo(FlightRepository repository) {
         return (args) -> {
             // fetch all customers
