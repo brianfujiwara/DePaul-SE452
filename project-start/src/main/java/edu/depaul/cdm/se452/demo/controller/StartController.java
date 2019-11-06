@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -25,7 +26,7 @@ public class StartController {
         return "greeting";
     }
 
-    @GetMapping("/setcookie")
+    @PostMapping("/cookie")
     public String setCookie(HttpServletResponse response, Model model) {
         Cookie newCookie = new Cookie("cookieType", "chocolateChip");
         newCookie.setMaxAge(0);
@@ -34,7 +35,7 @@ public class StartController {
         return "greeting";
     }
     
-    @GetMapping("/getcookie")
+    @GetMapping("/cookie")
     public String getCookie(
             @CookieValue(value="cookieType", defaultValue="nothing") String cookie, 
             Model model) {
@@ -42,14 +43,14 @@ public class StartController {
         return "greeting";
     }
 
-    @GetMapping("/setsession")
+    @PostMapping("/session")
     public String setSession(Model model) {
         model.addAttribute("name", "Dave");
         model.addAttribute("sessionData", "myTestData");
         return "greeting";
     }
     
-    @GetMapping("/getsession")
+    @GetMapping("/session")
     public String getSession(Model model) {
         model.addAttribute("name", "Dave");
         String sessionData = (String) model.asMap().getOrDefault("sessionData", "nothing");

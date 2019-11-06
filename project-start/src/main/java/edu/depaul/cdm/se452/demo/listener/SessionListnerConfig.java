@@ -11,21 +11,24 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SessionListnerConfig {
+
     private static final Logger log = LoggerFactory.getLogger(SessionListnerConfig.class);
-    
-  @Bean                           // bean for http session listener
+
+    @Bean                           // bean for http session listener
     public HttpSessionListener httpSessionListener() {
         return new HttpSessionListener() {
             @Override
             public void sessionCreated(HttpSessionEvent se) {               // This method will be called when session created
                 log.info("Session Created with session id+" + se.getSession().getId());
             }
+
             @Override
             public void sessionDestroyed(HttpSessionEvent se) {         // This method will be automatically called when session destroyed
                 log.info("Session Destroyed, Session id:" + se.getSession().getId());
             }
         };
     }
+
     @Bean                   // bean for http session attribute listener
     public HttpSessionAttributeListener httpSessionAttributeListener() {
         return new HttpSessionAttributeListener() {
@@ -35,10 +38,12 @@ public class SessionListnerConfig {
                 log.info("Attribute Name:" + se.getName());
                 log.info("Attribute Value:" + se.getName());
             }
+
             @Override
             public void attributeRemoved(HttpSessionBindingEvent se) {      // This method will be automatically called when session attribute removed
                 log.info("attributeRemoved");
             }
+
             @Override
             public void attributeReplaced(HttpSessionBindingEvent se) {     // This method will be automatically called when session attribute replace
                 log.info("Attribute Replaced following information");
@@ -47,5 +52,5 @@ public class SessionListnerConfig {
             }
         };
     }
-    
+
 }
