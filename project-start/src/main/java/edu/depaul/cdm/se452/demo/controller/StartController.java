@@ -25,36 +25,4 @@ public class StartController {
         return "greeting";
     }
 
-    @GetMapping("/setcookie")
-    public String setCookie(HttpServletResponse response, Model model) {
-        Cookie newCookie = new Cookie("cookieType", "chocolateChip");
-        newCookie.setMaxAge(0);
-        response.addCookie(newCookie);
-        model.addAttribute("name", "Dave");
-        return "greeting";
-    }
-    
-    @GetMapping("/getcookie")
-    public String getCookie(
-            @CookieValue(value="cookieType", defaultValue="nothing") String cookie, 
-            Model model) {
-        model.addAttribute("name", "Dave");
-        return "greeting";
-    }
-
-    @GetMapping("/setsession")
-    public String setSession(Model model) {
-        model.addAttribute("name", "Dave");
-        model.addAttribute("sessionData", "myTestData");
-        return "greeting";
-    }
-    
-    @GetMapping("/getsession")
-    public String getSession(Model model) {
-        model.addAttribute("name", "Dave");
-        String sessionData = (String) model.asMap().getOrDefault("sessionData", "nothing");
-        model.addAttribute("sessionData", "myTestData");
-        return "greeting";
-    }
-    
 }

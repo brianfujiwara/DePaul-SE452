@@ -18,7 +18,6 @@ public class AirportController {
 
     @Autowired
     private AirportRepository repo;
-    public AirportController() { }
 
     /**
      * Example showing auto binding by the framework to setup repo
@@ -31,7 +30,6 @@ public class AirportController {
     @GetMapping
     public String showAll(Model model) {
         model.addAttribute("airports", repo.findAll());
-
         return "airports/list";
     }
 

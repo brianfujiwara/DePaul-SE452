@@ -14,9 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 
-@SpringBootTest
-@RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
 public class AirportControllerTest {
   @Autowired
   private MockMvc mockMvc;

@@ -1,0 +1,1 @@
+insert into flights(num, departure_dt) values ('SE452', '2019-10-02 20:50:00.000');
