@@ -16,12 +16,12 @@ public class FancyPassengerController implements WebMvcConfigurer {
         registry.addViewController("/results").setViewName("results");
     }
     
-    @GetMapping("/fancypassenger")
+    @GetMapping("/fancy/passenger")
     public String showForm(Passenger passenger) {
         return "include-form";
     }
 
-    @PostMapping("/fancypassenger")
+    @PostMapping("/fancy/passenger")
     public String checkPersonInfo(@Valid Passenger passenger, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
