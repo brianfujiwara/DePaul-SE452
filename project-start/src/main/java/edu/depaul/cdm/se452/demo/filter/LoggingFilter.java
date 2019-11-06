@@ -39,7 +39,7 @@ public class LoggingFilter implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("filter destroy");
+        log.info("filter destroy");
     }
 
 }
